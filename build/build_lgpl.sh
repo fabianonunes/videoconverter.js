@@ -11,7 +11,7 @@ make clean
 # --static should be enforced because current emcc can't handle .lo files
 emconfigure ./configure --prefix=$(pwd)/../dist --64 --static
 emmake make -j8 CFLAGS="-O3"
-# emmake make install
+emmake make install
 cd ..
 
 cd ffmpeg
@@ -50,6 +50,17 @@ emconfigure ./configure  \
 	--enable-protocol=file \
 	--enable-muxer=mp4 \
 	--enable-demuxer=aac,h264,mov \
+	--disable-avdevice \
+	--disable-logging \
+	--disable-iconv \
+	--disable-bzlib \
+	--disable-avx \
+	--disable-fma4 \
+	--disable-postproc \
+	--disable-doc
+	# para testar:
+	# --disable-yasm \
+	# confirmados abaixo:
 	# --enable-gpl
 	# --enable-parser=aac,h264,mjpeg,mpeg4video,mpegaudio,mpegvideo,png \
 	# --enable-demuxer=aac,avi,h264,image2,matroska,pcm_s16le,mov,m4v,rawvideo,wav \
