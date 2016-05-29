@@ -57,6 +57,7 @@ emconfigure ./configure  \
 	--disable-avx \
 	--disable-fma4 \
 	--disable-postproc \
+	--disable-zlib \
 	--disable-doc
 	# para testar:
 	# --disable-yasm \
