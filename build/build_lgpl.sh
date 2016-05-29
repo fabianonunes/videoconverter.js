@@ -10,8 +10,8 @@ make clean
 
 # --static should be enforced because current emcc can't handle .lo files
 emconfigure ./configure --prefix=$(pwd)/../dist --64 --static
-emmake make -j2 CFLAGS="-O3"
-emmake make install
+emmake make -j8 CFLAGS="-O3"
+# emmake make install
 cd ..
 
 cd ffmpeg
@@ -47,16 +47,18 @@ emconfigure ./configure  \
 	--disable-indevs \
 	--disable-outdevs \
 	--disable-everything \
-	--enable-debug=INFO \
-	--enable-decoder=aac,h264,mjpeg,mpeg2video,mpeg4 \
-	--enable-encoder=aac,mpeg4,libx264 \
-	--enable-protocol=concat,file \
-	--enable-demuxer=aac,avi,h264,image2,matroska,pcm_s16le,mov,m4v,rawvideo,wav \
-	--enable-muxer=h264,ipod,mov,mp4 \
-	--enable-parser=aac,h264,mjpeg,mpeg4video,mpegaudio,mpegvideo,png \
-	--enable-bsf=aac_adtstoasc \
-	--enable-filter=transpose \
-	--enable-gpl
+	--enable-protocol=file \
+	--enable-muxer=mp4 \
+	--enable-demuxer=aac,h264,mov \
+	# --enable-gpl
+	# --enable-parser=aac,h264,mjpeg,mpeg4video,mpegaudio,mpegvideo,png \
+	# --enable-demuxer=aac,avi,h264,image2,matroska,pcm_s16le,mov,m4v,rawvideo,wav \
+	# --enable-muxer=h264,ipod,mov,mp4 \
+	# --enable-decoder=aac,h264,mjpeg,mpeg2video,mpeg4 \
+	# --enable-bsf=aac_adtstoasc \
+	# --enable-filter=transpose \
+	# --enable-encoder=aac,mpeg4,libx264 \
+	# --enable-debug=INFO \
 	# --enable-libx264
 
 emmake make -j8
