@@ -21,12 +21,45 @@ cd ffmpeg
 make clean
 
 # ffmpeg's configure doesn't correctly set CPPFLAGS="-D_POSIX_C_SOURCE=200112 -D_XOPEN_SOURCE=600" when built by emcc, so we add them.
-emconfigure ./configure --cc="emcc" --prefix=$(pwd)/../dist --enable-cross-compile --target-os=none --arch=x86_32 --cpu=generic \
-    --optflags="-O3" --extra-cflags="-D_POSIX_C_SOURCE=200112 -D_XOPEN_SOURCE=600" \
-    --disable-ffplay --disable-ffprobe --disable-ffserver --disable-asm --disable-doc --disable-devices --disable-pthreads --disable-w32threads --disable-network \
-    --disable-hwaccels --disable-parsers --disable-bsfs --disable-debug --disable-protocols --disable-indevs --disable-outdevs --enable-protocol=file
+emconfigure ./configure  \
+	--cc="emcc" \
+	--prefix=$(pwd)/../dist \
+	--enable-cross-compile \
+	--target-os=none \
+	--arch=x86_32 \
+	--cpu=generic \
+	--optflags="-O3" \
+	--extra-cflags="-D_POSIX_C_SOURCE=200112 -D_XOPEN_SOURCE=600" \
+	--disable-ffplay \
+	--disable-ffprobe \
+	--disable-ffserver \
+	--disable-asm \
+	--disable-doc \
+	--disable-devices \
+	--disable-pthreads \
+	--disable-w32threads \
+	--disable-network \
+	--disable-hwaccels \
+	--disable-parsers \
+	--disable-bsfs \
+	--disable-debug \
+	--disable-protocols \
+	--disable-indevs \
+	--disable-outdevs \
+	--disable-everything \
+	--enable-debug=INFO \
+	--enable-decoder=aac,h264,mjpeg,mpeg2video,mpeg4 \
+	--enable-encoder=aac,mpeg4,libx264 \
+	--enable-protocol=concat,file \
+	--enable-demuxer=aac,avi,h264,image2,matroska,pcm_s16le,mov,m4v,rawvideo,wav \
+	--enable-muxer=h264,ipod,mov,mp4 \
+	--enable-parser=aac,h264,mjpeg,mpeg4video,mpegaudio,mpegvideo,png \
+	--enable-bsf=aac_adtstoasc \
+	--enable-filter=transpose \
+	--enable-gpl
+	# --enable-libx264
 
-emmake make -j2
+emmake make -j8
 emmake make install
 
 
